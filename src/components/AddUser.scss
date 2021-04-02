@@ -1,0 +1,11 @@
+.add-user{
+    border: solid 1px var(--border-color);
+    display: flex;
+    flex-direction: column;
+    max-width: 330px;
+    &__submit{
+        width: 40%;
+        margin: 0 auto;
+        background-color: #42b983;
+    }
+}

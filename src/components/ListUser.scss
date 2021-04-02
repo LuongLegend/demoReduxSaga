@@ -1,0 +1,63 @@
+.list-user {
+    flex-grow: 1;
+
+    &>div {
+        margin-bottom: 1rem;
+    }
+
+    &__search,
+    &__body {
+        border: 1px solid yellow;
+    }
+    &__search {
+        input {
+            padding: 1rem;
+        }
+    }
+
+    &__icon-action {
+        display: flex;
+        justify-content: space-evenly;
+        font-size: 20px;
+
+        &__edit,
+        &__undo,
+        &__trash {
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: 1px 0px 7px 2px yellow;
+            }
+        }
+
+        &__edit {
+            color: lightblue
+        }
+
+        &__undo {
+            color: green;
+        }
+
+        &__trash {
+            color: black
+        }
+    }
+
+    &__table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+
+        th {
+            color: var(--warn-color);
+            border-bottom: 1px solid green;
+        }
+
+        tr:nth-child(even) {
+            color: var(--special-color);
+            background-color: rgba(#f2f2f2, 0.1);
+        }
+
+    }
+
+}

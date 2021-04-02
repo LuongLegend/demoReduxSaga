@@ -17,7 +17,7 @@ export default async function callApi(endpoint, method = 'GET', body, config) {
             ...dataQuery,
             ...config
         })
-        return response.data
+        return response
     } catch (err) {
         console.log('err api', err);
     }
