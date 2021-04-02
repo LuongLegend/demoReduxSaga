@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { getUser } from '../actions/user'
 import './ListUser.scss'
-const ListUser = ({ user }) => {
-    console.log('user', user)
+const ListUser = ({ user, onSearchUser }) => {
+    const [keyword, setKeyword] = useState('');
+    const handleKeywordChange = (e) => {
+        setKeyword(e.target.value);
+        onSearchUser(e.target.value)
+    }
     return (
         <div className='list-user'>
             <div className='list-user__search'>
-                <input type='search' placeholder='Tìm kiếm'/>
+                <input type='search' value={keyword} placeholder='Tìm kiếm' onChange={handleKeywordChange} />
             </div>
             <div className='list-user__body'>
                 <table className='list-user__table'>
@@ -30,8 +35,6 @@ const ListUser = ({ user }) => {
                                                 &#9100;
                                     </span>
                                     }
-
-
                                 </td>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
@@ -49,4 +52,10 @@ const ListUser = ({ user }) => {
 const mapStateToProps = ({ user }) => {
     return { user }
 }
-export default connect(mapStateToProps)(ListUser);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSearchUser: (keyword) => dispatch(getUser(keyword))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListUser);

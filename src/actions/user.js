@@ -3,9 +3,10 @@ import {
     FETCH_USER_SUCCESS
 } from '../constants/ActionTypes'
 
-export const getUser = () => {
+export const getUser = (keyword = '') => {
     return {
-        type: FETCH_USER
+        type: FETCH_USER,
+        keyword
     }
 }
 export const getUserSuccess = (user) => {
