@@ -1,5 +1,5 @@
 import './App.scss';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getUser } from './actions/user'
 import GlobalLoading from './components/GlobalLoading'

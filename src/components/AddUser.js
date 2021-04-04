@@ -6,7 +6,7 @@ export default function AddUser() {
     const [active, setActive] = useState(false);
     return (
         <div>
-            <form className='add-user' onSubmit={(e) => { e.preventDefault(); alert('ok') }}>
+            <form className='add-user bg-div' onSubmit={(e) => { e.preventDefault(); alert('ok') }}>
                 <div className='divide-haft'>
                     <label htmlFor="name" style={{ minWidth: 100 }}>Name</label>
                     <input
@@ -14,6 +14,7 @@ export default function AddUser() {
                         id='name'
                         value={userName}
                         placeholder='Name'
+                        required={true}
                         onChange={(e) => setUserName(e.target.value)}
                     />
                 </div>
@@ -25,6 +26,7 @@ export default function AddUser() {
                         value={age}
                         placeholder='Age'
                         min='0'
+                        required={true}
                         onChange={(e) => setAge(e.target.value)}
                     />
                 </div>
@@ -34,7 +36,7 @@ export default function AddUser() {
                 </div>
                 <div className='divide-haft'>
                     <input type='submit' value='Thêm' className='add-user__submit' style={{backgroundColor: 'lightgreen'}} />
-                    <input type='submit' value='Cập nhật' className='add-user__submit' />
+                    {/* <input type='submit' value='Cập nhật' className='add-user__submit' /> */}
                 </div>
             </form>
         </div>
