@@ -3,9 +3,14 @@
     display: flex;
     flex-direction: column;
     max-width: 330px;
-    &__submit{
+    &__submit, &__cancel{
         width: 40%;
         margin: 0 auto;
+    }
+    &__submit{
         background-color: #42b983;
+    }
+    &__cancel{
+        background-color: white;
     }
 }

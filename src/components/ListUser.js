@@ -4,9 +4,17 @@ import {
     getUser,
     deleteUser
 } from '../actions/user'
-import { getCurrentUser } from '../actions/currentUser'
+import { getCurrentUser, removeCurrentUser } from '../actions/currentUser'
+import { showUserForm } from '../actions/ui'
 import './ListUser.scss'
-const ListUser = ({ user, onSearchUser, onDeleteUser,onGetCurrentUser }) => {
+const ListUser = ({
+    user,
+    onSearchUser,
+    onDeleteUser,
+    onGetCurrentUser,
+    onShowUserForm,
+    onRemoveCurrentUser
+}) => {
     const [keyword, setKeyword] = useState('');
     const handleKeywordChange = (e) => {
         setKeyword(e.target.value);
@@ -14,6 +22,7 @@ const ListUser = ({ user, onSearchUser, onDeleteUser,onGetCurrentUser }) => {
     }
     const handleEditIconClick = (item) => {
         onGetCurrentUser(item);
+        onShowUserForm();
     }
     const handleTrashIconClick = (item) => {
         const ans = window.confirm('Bạn thực sự muốn xóa tài khoản này ư?');
@@ -21,11 +30,16 @@ const ListUser = ({ user, onSearchUser, onDeleteUser,onGetCurrentUser }) => {
             onDeleteUser(item);
         }
     }
+    const handleAddUserClick = () => {
+        onShowUserForm();
+        onRemoveCurrentUser();
+    }
     return (
         <div className='list-user'>
             <div className='list-user__search bg-div' >
                 <input type='search' value={keyword} placeholder='Tìm kiếm' onChange={handleKeywordChange} />
             </div>
+            <input type='button' value='Thêm tài khoản' className='list-user__btn-add' onClick={handleAddUserClick}/>
             <div className='list-user__body bg-div'>
                 <table className='list-user__table'>
                     <thead>
@@ -78,6 +92,8 @@ const mapDispatchToProps = (dispatch) => {
         onSearchUser: (keyword) => dispatch(getUser(keyword)),
         onDeleteUser: (item) => dispatch(deleteUser(item)),
         onGetCurrentUser: (currentUser) => dispatch(getCurrentUser(currentUser)),
+        onShowUserForm: () => dispatch(showUserForm()),
+        onRemoveCurrentUser: () => dispatch(removeCurrentUser()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ListUser);

@@ -1,9 +1,12 @@
 import {
     SHOW_LOADING,
-    HIDE_LOADING
+    HIDE_LOADING,
+    SHOW_USER_FORM,
+    HIDE_USER_FORM
 } from '../constants/ActionTypes'
 const initialState = {
-    isLoading: false
+    isLoading: false,
+    showUserForm: false,
 }
 const uiReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -16,6 +19,16 @@ const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false
+            };
+        case SHOW_USER_FORM:
+            return {
+                ...state,
+                showUserForm: true
+            };
+        case HIDE_USER_FORM:
+            return {
+                ...state,
+                showUserForm: false
             };
         default:
             return state;
