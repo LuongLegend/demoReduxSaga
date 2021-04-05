@@ -1,4 +1,4 @@
-import { fork, takeLatest, takeEvery, call, put, delay, select } from 'redux-saga/effects' //non-blocking
+import { takeLatest, takeEvery, call, put, delay, select } from 'redux-saga/effects' //non-blocking
 import {
     DELETE_USER,
     FETCH_USER,
@@ -33,7 +33,7 @@ function* watchFetchListUser({ keyword }) {
 }
 
 function* watchDeleteUser({ item }) {
-    const { id, name } = item;
+    const { id } = item;
     yield put(showLoading());
     const res = yield call(() => callApi(`user/${id}`, 'DELETE'));
     if (res && res.status === 200) {
@@ -43,9 +43,8 @@ function* watchDeleteUser({ item }) {
         yield put(deleteUserSuccess(newUserList));
         //check if current user was user's removed
         const currentUser = yield select(state => state.currentUser);
-        if (currentUser.id === id)
+        if (currentUser && currentUser.id === id)
             yield put(removeCurrentUser());
-        alert(`Đã xóa tài khoản ${name} thành công`)
     }
     yield put(hideLoading());
 }
@@ -56,7 +55,6 @@ function* watchAddNewUser({ item }) {
         const user = yield select(state => state.user);
         const newUserList = [...user, res.data];
         yield put(addUserSuccess(newUserList));
-        alert('Thêm mới tài khoản thành công')
     }
     yield put(hideLoading());
 }
@@ -71,7 +69,7 @@ function* watchUpdateUser({ item }) {
         yield put(updateUserSuccess(user));
         //update currentUser
         yield put(updateCurrentUser(item));
-        alert('Cập nhật tài khoản thành công')
+        // alert('Cập nhật tài khoản thành công')
     }
     yield put(hideLoading());
 }

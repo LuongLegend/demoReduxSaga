@@ -5,9 +5,6 @@ import { removeCurrentUser } from '../actions/currentUser'
 import { addUser, updateUser } from '../actions/user'
 import './InfoUserForm.scss'
 
-const isEmptyObj = obj => {
-    return Object.keys(obj).length === 0
-}
 const InfoUserForm = (props) => {
     const {
         currentUser,
@@ -16,13 +13,13 @@ const InfoUserForm = (props) => {
         onAddUser,
         onUpdateUser
     } = props;
-    const isEmptyCurrentUser = isEmptyObj(currentUser); //true => add; false => edit
-    const [userName, setUserName] = useState(isEmptyCurrentUser ? '' : currentUser.name);
-    const [age, setAge] = useState(isEmptyCurrentUser ? '' : currentUser.age);
-    const [active, setActive] = useState(isEmptyCurrentUser ? false : currentUser.active);
+    // const !currentUser = isEmptyObj(currentUser); //true => add; false => edit
+    const [userName, setUserName] = useState(!currentUser ? '' : currentUser.name);
+    const [age, setAge] = useState(!currentUser ? '' : currentUser.age);
+    const [active, setActive] = useState(!currentUser ? false : currentUser.active);
 
     useEffect(() => {
-        if (!isEmptyCurrentUser) {
+        if (currentUser) {
             const { name, age, active } = currentUser;
             setUserName(name);
             setAge(age);
@@ -37,7 +34,7 @@ const InfoUserForm = (props) => {
     const handleSubmitForm = e => {
         e.preventDefault();
         const userInfo = { name: userName, age, active };
-        if (isEmptyCurrentUser) {
+        if (!currentUser) {
             onAddUser(userInfo);
             setUserName('');
             setAge('');
@@ -84,7 +81,7 @@ const InfoUserForm = (props) => {
                     <input id='active' type='checkbox' style={{ fontSize: 100 }} checked={active} onChange={() => setActive(!active)} />
                 </div>
                 <div className='divide-haft'>
-                    <input type='submit' value={isEmptyCurrentUser ? 'Thêm mới' : 'Cập nhật'} className='add-user__submit' />
+                    <input type='submit' value={!currentUser ? 'Thêm mới' : 'Cập nhật'} className='add-user__submit' />
                     <input type='button' value={'Hủy'} className='add-user__cancel' onClick={handleCancelClick} />
                 </div>
             </form>

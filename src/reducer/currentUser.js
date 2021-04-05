@@ -4,14 +4,14 @@ import {
     REMOVE_CURRENT_USER
 } from '../constants/ActionTypes'
 
-const currentUserReducer = (state = {}, action) => {
+const currentUserReducer = (state = null, action) => {
     switch (action.type) {
         case GET_CURRENT_USER:
             return action.currentUser;
         case UPDATE_CURRENT_USER:
             return action.currentUser;
         case REMOVE_CURRENT_USER:
-            return {};
+            return null;
         default:
             return state;
     }

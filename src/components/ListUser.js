@@ -20,11 +20,15 @@ const ListUser = ({
         setKeyword(e.target.value);
         onSearchUser(e.target.value)
     }
+    const handleKeywordClick = (e) => {
+        e.target.select();
+    }
     const handleEditIconClick = (item) => {
         onGetCurrentUser(item);
         onShowUserForm();
     }
     const handleTrashIconClick = (item) => {
+        console.log('delete', item)
         const ans = window.confirm('Bạn thực sự muốn xóa tài khoản này ư?');
         if (ans) {
             onDeleteUser(item);
@@ -37,9 +41,15 @@ const ListUser = ({
     return (
         <div className='list-user'>
             <div className='list-user__search bg-div' >
-                <input type='search' value={keyword} placeholder='Tìm kiếm' onChange={handleKeywordChange} />
+                <input
+                    type='search'
+                    value={keyword}
+                    placeholder='Tìm kiếm'
+                    onChange={handleKeywordChange}
+                    onClick={handleKeywordClick}
+                />
             </div>
-            <input type='button' value='Thêm tài khoản' className='list-user__btn-add' onClick={handleAddUserClick}/>
+            <input type='button' value='Thêm tài khoản' className='list-user__btn-add' onClick={handleAddUserClick} />
             <div className='list-user__body bg-div'>
                 <table className='list-user__table'>
                     <thead>

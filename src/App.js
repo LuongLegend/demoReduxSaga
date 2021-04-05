@@ -1,5 +1,5 @@
 import './App.scss';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getUser } from './actions/user'
 import GlobalLoading from './components/GlobalLoading'
@@ -9,7 +9,7 @@ function App(props) {
   const { onGetUser, showUserForm } = props;
   useEffect(() => {
     onGetUser();
-  }, [])
+  }, [onGetUser])
   return (
     <div className="App">
       {
